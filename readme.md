@@ -1,7 +1,8 @@
+> 拒绝无谓的加班
 # 背景介绍
 worktime-tools，是为了解决工时系统如下不足而开发：
-* 员工无法及时准确的统计自己的工时使用情况。
-* 容易出现到月底才发现工时不足导致扣工资。
+* *员工无法及时准确的统计自己的工时使用情况。* 
+* **容易出现到月底才发现工时不足导致扣工资。**
 * 拒绝无谓的加班和浪费时间和生命，
 
 # 功能
@@ -15,3 +16,35 @@ worktime-tools，是为了解决工时系统如下不足而开发：
 
 # 愿景
 总之，拒绝加班，拒绝浪费，珍爱生活，享受生活
+
+*** 
+
+# 使用说明
+ ## 环境准备
+ * 安装JDK 1.8
+ * maven 3.2+ 需要源码编译时下载
+ ## 下载代码
+ git clone https://github.com/VerRan/worktime-tool.git
+ ## 编译构建代码
+ * `cd D:\springshell\worktime-tool`
+ * ``mvn clean package -DskipTests ``
+ ## 运行
+ ### 数据准备
+ * 首先进入考勤系统，点击个人打卡数据查询菜单
+ * 然后拷贝需要统计的时间段数据如：9-1日至9-25日
+ * 黏贴拷贝的数据到xlsx（excel文件）中
+ * 将文件拷贝到代码下载的位置如上文的D:\springshell\worktime-tool 下
+ 当然也可以任意位置，这种情况需要导入时输入绝对路径
+ ### 统计
+ * `cd D:\springshell\worktime-tool`
+ * ``mvn spring-boot:run``
+ * ``imp test`` 导入test.xlsx文件，可以不用添加后缀
+ * ``show `` 查看统计结果
+ 
+ ###举例
+   * shell:>imp test
+   * shell:> show
+   * 应上班时长:128小时
+   * 实际上班时长:129.43333333333334小时
+   * 可用抵扣时长:86分钟
+   * 需补时长:0分钟

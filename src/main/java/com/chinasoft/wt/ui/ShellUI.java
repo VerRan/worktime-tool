@@ -29,7 +29,7 @@ public class ShellUI {
     private WorkTimeRecordService workTimeRecordService;
 
     @ShellMethod("import the worktime data from  xlsx file,the param is abs path of xlsx file")
-    public String imp(String  xlsxPath){
+    public String imp(String  xlsxPath) throws Exception{
         int i= 0;
         try {
             if(xlsxPath.contains(".xls")||xlsxPath.contains("txt")){
@@ -40,7 +40,7 @@ public class ShellUI {
             }
             i = workTimeRecordService.importWTRfromXLS(xlsxPath);
         } catch (Exception e) {
-            return "import error ,请核对您的文件格式是否为xlsx,以及内容格式是否与考勤系统一致！";
+            return new String("import error ,请核对您的文件路径，格式是否为xlsx,以及内容格式是否与考勤系统一致！".getBytes(),"GBK");
         }
         return "import success ,you have import "+i+" data ，now you can use show command to display summary";
     }

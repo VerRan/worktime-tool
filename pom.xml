@@ -8,6 +8,11 @@
     <artifactId>worktime-tool</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+
     <!--添加springboot 父依赖 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
