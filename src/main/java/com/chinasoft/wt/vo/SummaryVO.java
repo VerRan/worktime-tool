@@ -6,7 +6,16 @@ package com.chinasoft.wt.vo;
 public class SummaryVO {
     String expectWTL ;
     String actWTL ;
-    String alvTWL ;
+    String alvTWL="0分钟" ;
+    String shouldApendTWL ="0分钟" ;
+
+    public String getShouldApendTWL() {
+        return shouldApendTWL;
+    }
+
+    public void setShouldApendTWL(String shouldApendTWL) {
+        this.shouldApendTWL = shouldApendTWL;
+    }
 
     public String getExpectWTL() {
         return expectWTL;

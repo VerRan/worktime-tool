@@ -32,12 +32,15 @@ public class ShellUI {
     public String imp(String  xlsxPath){
         int i= 0;
         try {
+            if(xlsxPath.contains(".xls")||xlsxPath.contains("txt")){
+                return "当前只支持.xlsx格式";
+            }
             if(!xlsxPath.contains(".xlsx")){//如果没有加后缀，自动添加上
                 xlsxPath=xlsxPath+".xlsx";
             }
             i = workTimeRecordService.importWTRfromXLS(xlsxPath);
         } catch (Exception e) {
-            return "import error "+e.getLocalizedMessage();
+            return "import error ,请核对您的文件格式是否为xlsx,以及内容格式是否与考勤系统一致！";
         }
         return "import success ,you have import "+i+" data ，now you can use show command to display summary";
     }
@@ -46,15 +49,11 @@ public class ShellUI {
     public String show(){
         StringBuffer buffer =new StringBuffer();
         SummaryVO summaryVO = workTimeRecordService.summary();
-        buffer.append("--company_work_time_length--------my_work_time_length--------------i_can_use_length---------------");
-        buffer.append("\n");
-        buffer.append("--");
-        buffer.append(""+summaryVO.getExpectWTL());
-        buffer.append("----------");
-        buffer.append(""+summaryVO.getActWTL());
-        buffer.append("--------------");
-        buffer.append(""+summaryVO.getAlvTWL());
-        buffer.append("---------------");
+        //buffer.append("--company_work_time_length--------my_work_time_length--------------i_can_use_length---------------");
+        buffer.append("应上班时长:"+summaryVO.getExpectWTL()+"\n");
+        buffer.append("实际上班时长:"+summaryVO.getActWTL()+"\n");
+        buffer.append("可用抵扣时长:"+summaryVO.getAlvTWL()+"\n");
+        buffer.append("需补时长:"+summaryVO.getShouldApendTWL()+"\n");
         return buffer.toString();
     }
 

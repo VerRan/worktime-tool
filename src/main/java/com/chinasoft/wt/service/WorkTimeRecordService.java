@@ -5,7 +5,6 @@ import com.chinasoft.wt.repository.WorkTimeRecordRepository;
 import com.chinasoft.wt.util.DateUtils;
 import com.chinasoft.wt.util.ExcelUtils;
 import com.chinasoft.wt.vo.SummaryVO;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,9 +38,14 @@ public class WorkTimeRecordService {
         //1. 解析xls
         InputStream    ins = new FileInputStream(
                     new File(xlsPath));
+
+        //2. 每次导入 先清除之前的数据
+        workTimeRecordRepository.deleteAll();
+
+        //3. 倒入文件信息
         List<WorkTimeRecord>    wtrList = excelUtils.readXlsxFileToObj(ins);
 
-        //2. 插入数据库
+        //4. 插入数据库
         return workTimeRecordRepository.save(wtrList).size();
     }
 
@@ -102,9 +106,15 @@ public class WorkTimeRecordService {
         long expectWTL = findAll().size()*8*60;
         double actWTL = this.caculateAcutalLength();
         long alvTWL = new Double(actWTL).longValue() - expectWTL;
-        vo.setActWTL(actWTL+"");
-        vo.setAlvTWL(alvTWL+"");
-        vo.setExpectWTL(expectWTL+"");
+        vo.setExpectWTL(expectWTL/60+"小时");
+        vo.setActWTL(actWTL/60+"小时");
+        if(alvTWL>0){
+            vo.setAlvTWL(alvTWL+"分钟");
+        }else
+        {
+            vo.setShouldApendTWL(Math.abs(alvTWL)+"分钟");
+        }
+
         return vo;
     }
 }

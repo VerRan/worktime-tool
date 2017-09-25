@@ -3,6 +3,7 @@ package com.chinasoft.wt.util;
 import com.chinasoft.wt.model.WorkTimeRecord;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -27,9 +28,12 @@ public class ExcelUtils {
         //循环获取每一行数据
         for(int i=0;i<sheet.getLastRowNum()+1;i++){
             Row subRow =   sheet.getRow(i);
-            if(i==0){//第一行直接过滤不进行处理
+            if(i==0&&subRow.getCell(0).getCellType()== XSSFCell.CELL_TYPE_STRING){
+                //如果第一行的第一列为string ，则说明是说明行，则过滤
                 continue;
             }
+
+
             WorkTimeRecord wtr=new WorkTimeRecord();
             //循环每一列
             for(int j=0;j<subRow.getLastCellNum();j++){
