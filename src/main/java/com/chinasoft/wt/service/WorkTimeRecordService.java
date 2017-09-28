@@ -34,13 +34,15 @@ public class WorkTimeRecordService {
      * 导入工时excel
      *
      * **/
-    public int importWTRfromXLS(String xlsPath) throws Exception {
+    public int importWTRfromXLS(String xlsPath,String staffCode) throws Exception {
         //1. 解析xls
         InputStream    ins = new FileInputStream(
                     new File(xlsPath));
 
-        //2. 每次导入 先清除之前的数据
-        workTimeRecordRepository.deleteAll();
+        //2. 每次导入 先清除当前登陆工号的数据，避免重复
+        WorkTimeRecord workTimeRecord=new WorkTimeRecord();
+        workTimeRecord.setStaffCode(staffCode);
+        workTimeRecordRepository.delete(workTimeRecord);
 
         //3. 倒入文件信息
         List<WorkTimeRecord>    wtrList = excelUtils.readXlsxFileToObj(ins);
@@ -106,10 +108,10 @@ public class WorkTimeRecordService {
         long expectWTL = findAll().size()*8*60;
         double actWTL = this.caculateAcutalLength();
         long alvTWL = new Double(actWTL).longValue() - expectWTL;
-        vo.setExpectWTL(expectWTL/60+"小时");
-        vo.setActWTL(actWTL/60+"小时");
+        vo.setExpectWTL(expectWTL/60+" 小时");
+        vo.setActWTL(actWTL/60+" 小时");
         if(alvTWL>0){
-            vo.setAlvTWL(alvTWL+"分钟");
+            vo.setAlvTWL(alvTWL+" 分钟");
         }else
         {
             vo.setShouldApendTWL(Math.abs(alvTWL)+"分钟");

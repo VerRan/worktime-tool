@@ -1,0 +1,9 @@
+server:
+  port: 5555
+  tomcat:
+    uri-encoding: UTF-8
+#####设置日志######
+logging:
+   file: D://logs//gateway.log
+   level:
+     root: info

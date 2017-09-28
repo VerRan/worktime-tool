@@ -32,7 +32,7 @@ public class WorkTimeRecordServiceTest {
     @Before
     public void testImportWTRfromXLS() throws Exception {
         String xlsPath="f://test.xlsx";
-        int recordCount = workTimeRecordService.importWTRfromXLS(xlsPath);
+        int recordCount = workTimeRecordService.importWTRfromXLS(xlsPath,"107207");
         Assert.assertEquals(11,recordCount);
 
     }

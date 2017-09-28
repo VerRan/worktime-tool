@@ -1,0 +1,18 @@
+server:
+  port: 7007
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.69:8635/cloudmanager??characterEncoding=utf8&useSSL=false
+    username: root
+    password: Cm123!@#
+  ####JPA设置配置model自动创建和更新，即如果数据没有对应的表创建，结构不同则更新####
+  jpa:
+     hibernate:
+       ddl-auto: update
+#####设置日志######
+logging:
+   file: ..//logs//gateway.log
+   level:
+     root: info
