@@ -4,7 +4,9 @@ spring:
   jackson:
       date-format: yyyy-MM-dd HH:mm:ss
       time-zone: GMT+8
-
+  h2:
+      console:
+          enabled: true
   http:
     multipart:
        max-file-size: 128KB

@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+
+<h1 align="center">WorkTimeTool</h1>
+<div>
+	<ul>
+		<li><a href="/files/sample.xlsx">样例下载</a></li>
+		<li> 当前版本只支持xlsx格式</li>
+		<li> 当前版本不支持针对迟到，早退,出差的处理，系统会自动过滤当天数据</li>
+
+	</ul>
+</div>
+
+
+<div>
+	<form method="POST" enctype="multipart/form-data" action="/caculate">
+		<table>
+			<tr><td></td><td><input type="file" name="file" /></td></tr>
+			<tr><td></td><td><input type="submit" value="计算" /></td></tr>
+		</table>
+	</form>
+</div>
+
+<!--<div>-->
+<!--<ul>-->
+<!--<li th:each="file : ${files}">-->
+<!--<a th:href="${file}" th:text="${file}" />-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+
+<div  th:if="${summary}">
+	<table border="1" align="center">
+		<tr>
+			<td>应上班时长</td>
+			<td>实际上班时长</td>
+			<td>可用抵扣时长</td>
+			<td>应补时长</td>
+		</tr>
+
+		<tr>
+			<td th:text="${summary.expectWTL}"></td>
+			<td th:text="${summary.actWTL}"></td>
+			<td th:text="${summary.alvTWL}"></td>
+			<td th:text="${summary.shouldApendTWL}"></td>
+		</tr>
+	</table>
+
+</div>
+<!--<div th:if="${message}">-->
+<!--<h3 th:text="${message}"/>-->
+<!--</div>-->
+</body>
+</html>

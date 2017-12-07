@@ -58,8 +58,8 @@ public class WorkTimeRecordServiceTest {
     @Test
     //计算可用抵扣时长
     public  void testCaculateAvaliableLength(){
-
-        double wtr= workTimeRecordService.caculateAcutalLength();
+        List list = workTimeRecordService.findAll();
+        double wtr= workTimeRecordService.caculateAcutalLength(list);
         System.out.println("wtr is "+wtr+"分钟");
         System.out.println("act is "+88*60+"分钟");
         System.out.println("avilable is "+(wtr-88*60)+"分钟");
@@ -69,6 +69,6 @@ public class WorkTimeRecordServiceTest {
     @Test
     //汇总
     public void testSummary(){
-        SummaryVO summaryVO = workTimeRecordService.summary();
+        SummaryVO summaryVO = workTimeRecordService.summary("107207");
     }
 }

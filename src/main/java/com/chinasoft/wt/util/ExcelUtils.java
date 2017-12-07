@@ -44,7 +44,7 @@ public class ExcelUtils {
                     Cell cell =subRow.getCell(j);
 
                     if(j==0){//第一列 工号数字型
-                        wtr.setStaffCode(cell.getNumericCellValue()+"");
+                        wtr.setStaffCode(Math.round(cell.getNumericCellValue())+"");
                     }
                     if(j==1){//姓名
                         wtr.setStaffName(cell.getStringCellValue()+"");

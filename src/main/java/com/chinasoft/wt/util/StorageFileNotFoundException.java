@@ -1,4 +1,4 @@
-package com.chinasoft.wt.storage;
+package com.chinasoft.wt.util;
 
 public class StorageFileNotFoundException extends StorageException {
 

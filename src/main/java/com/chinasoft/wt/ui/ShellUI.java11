@@ -48,7 +48,7 @@ public class ShellUI {
     @ShellMethod("show the summary data of work time list ")
     public String show(){
         StringBuffer buffer =new StringBuffer();
-        SummaryVO summaryVO = workTimeRecordService.summary();
+        SummaryVO summaryVO = workTimeRecordService.summary("107207");
         //buffer.append("--company_work_time_length--------my_work_time_length--------------i_can_use_length---------------");
         buffer.append("should time length:"+summaryVO.getExpectWTL()+"\n");
         buffer.append("actual time length:"+summaryVO.getActWTL()+"\n");
